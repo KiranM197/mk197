@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://www.favicon.cc/?">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <style>
+        /* Your existing styles remain unchanged */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #F2F2F2;
+        }
+
+        #total {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 0.5px solid #020000;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 0 10px black;
+        }
+
+        #h2 {
+            color: #D82B1B;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #inputs {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="number"],
+        select,
+        input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        select {
+            border: 1px solid #0a0a0a;
+            border-radius: 4px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 16px); /* Make text input responsive */
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        .Button {
+            color: oldlace;
+            border-radius: 1px;
+            background-color: #D82B1B;
+            width: 120px;
+            height: 40px;
+            border-radius: 15px;
+            font: 19px arial;
+        }
+
+        #table {
+            display: block;
+            border: #060000 8px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #060000;
+            padding: 10px solid black;
+            text-align: left;
+        }
+        th {
+            background-color: #D82B1B;
+            color: oldlace;
+        }
+
+        #headings {
+            font-weight: 20px;
+            color: #060000;
+        }
+        #totalExpense, #budgetRemaining {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+    <title>Expense Tracker</title>
+</head>
+
+<body>
+    <div id="total">
+        <h1 id="h2">Expense Tracker</h1>
+        <div id="inputs">
+            <!-- Your existing HTML input elements remain unchanged -->
+            <label class="headings">Total Budget</label>
+            <input type="number" style='border-radius:4px' id="budgetAmount" name="number" placeholder="Amount" />
+
+            <label class="headings">Credit Cards</label>
+            <select id="cars" name="cars">
+                <option value="ICICI-Amazon Pay">ICICI-Amazon Pay</option>
+                <option value="ICICI-Platinum">ICICI-Platinum</option>
+                <option value="Axis Bank">Axis Bank</option>
+                <option value="HDFC Bank">HDFC Bank</option>
+                <option value="">Enter Manually</option>
+            </select>
+            <input type="text" id="credit" style="display:none;" placeholder="Enter your custom card">
+            <br>
+            <input type="number" name="number" id="creditAmount" placeholder="Amount">
+
+            <label>Mutual Funds</label>
+            <select id="funds" name="funds">
+                <option value="Personal">Personal</option>
+                <option value="Home">Home</option>
+            </select>
+            <input type="text" id="manualInputFunds" style="display:none;" placeholder="Enter your custom fund">
+            <br>
+            <input type="number" name="number" id="fundsAmount" placeholder="Amount">
+
+            <label>Basic Needs</label>
+            <select id="needs" name="needs">
+                <option value="Withdraw">Withdraw</option>
+                <option value="Home">Home</option>
+            </select>
+            <input type="text" id="manualInputNeeds" style="display:none;" placeholder="Enter your custom need">
+            <br>
+            <input type="number" name="number" id="needsAmount" placeholder="Amount">
+
+            <label>Recurring Deposits</label>
+            <select id="deposits" name="deposits">
+                <option value="Withdraw">Withdraw</option>
+                <option value="Home">Home</option>
+            </select>
+            <input type="text" id="manualInputDeposits" style="display:none;" placeholder="Enter your custom deposit">
+            <br>
+            <input type="number" name="number" id="depositAmount" placeholder="Amount">
+
+            <label>Insurance</label>
+            <select id="insurance" name="insurance">
+                <option value="Personal">Personal</option>
+            </select>
+            <input type="text" id="manualInputInsurance" style="display:none;"
+                placeholder="Enter your custom insurance">
+            <br>
+            <input type="number" name="number" id="insuranceAmount" placeholder="Amount">
+
+            <label>Goals</label>
+            <select id="goals" name="goals">
+                <option value="Education">Education</option>
+                <option value="Vacation">Vacation</option>
+            </select>
+            <input type="text" id="manualInputGoals" style="display:none;" placeholder="Enter your custom goal">
+            <br>
+            <input type="number" name="number" id="goalsAmount" placeholder="Amount">
+
+            <label>Emergency Funds</label>
+            <select id="emergency" name="emergency">
+                <option value="Medical">Medical</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="text" id="manualInputEmergency" style="display:none;"
+                placeholder="Enter your custom emergency fund">
+            <br>
+            <input type="number" name="number" id="emergencyAmount" placeholder="Amount">
+
+            <label>Quick Transfers</label>
+            <select id="transfer" name="transfer">
+                <option value="Family">Family</option>
+                <option value="Friends">Friends</option>
+            </select>
+            <input type="text" id="manualInputTransfer" style="display:none;" placeholder="Enter your custom transfer">
+            <br>
+            <input type="number" name="number" id="transferAmount" placeholder="Amount">
+
+            <center><button class='Button' type="button" onClick="logia()">Submit</button></center>
+
+            <br>
+            <!-- Your existing table HTML is commented out as it's not being used -->
+            <table id="expenseTable" border="2">
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+
+            <table id="categoryTable" border="2">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="categoryTableBody">
+                    <!-- Category table body will be dynamically populated here -->
+                </tbody>
+            </table>
+
+            <!-- <p><span id="totalExpense"></span></p>  -->
+            <div id="totalExpense"></div>
+            <div id="budgetRemaining"></div>
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#cars, #funds, #needs, #deposits, #insurance, #goals, #emergency, #transfer').select2({
+                tags: true,
+                allowClear: true
+            });
+        });
+    let totalExpense=0;
+        function logia() {
+            const tableBody = document.getElementById("tableBody");
+            const categoryTableBody = document.getElementById("categoryTableBody");
+
+            const budget = document.getElementById("budgetAmount").value;
+
+            const credit = document.getElementById("cars").value;
+            const creditAmount = document.getElementById("creditAmount").value;
+
+            const funds = document.getElementById("funds").value;
+            const fundsAmount = document.getElementById("fundsAmount").value;
+
+            const needs = document.getElementById("needs").value;
+            const needsAmount = document.getElementById("needsAmount").value;
+
+            const deposits = document.getElementById("deposits").value;
+            const depositAmount = document.getElementById("depositAmount").value;
+
+            const insurance = document.getElementById("insurance").value;
+            const insuranceAmount = document.getElementById("insuranceAmount").value;
+
+            const goals = document.getElementById("goals").value;
+            const goalsAmount = document.getElementById("goalsAmount").value;
+
+            const emergency = document.getElementById("emergency").value;
+            const emergencyAmount = document.getElementById("emergencyAmount").value;
+
+            const transfer = document.getElementById("transfer").value;
+            const transferAmount = document.getElementById("transferAmount").value;
+
+
+            const display = document.getElementById("totalExpense").value
+
+            const amount = parseFloat(creditAmount) + parseFloat(fundsAmount) +
+                parseFloat(needsAmount) + parseFloat(depositAmount) +
+                parseFloat(insuranceAmount) + parseFloat(goalsAmount) +
+                parseFloat(emergencyAmount) + parseFloat(transferAmount);
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid number");
+                return;
+            }
+
+            updateCategoryExpense(categoryTableBody, credit, creditAmount);
+            updateCategoryExpense(categoryTableBody, funds, fundsAmount);
+            updateCategoryExpense(categoryTableBody, needs, needsAmount);
+            updateCategoryExpense(categoryTableBody, deposits, depositAmount);
+            updateCategoryExpense(categoryTableBody, insurance, insuranceAmount);
+            updateCategoryExpense(categoryTableBody, goals, goalsAmount);
+            updateCategoryExpense(categoryTableBody, emergency, emergencyAmount);
+            updateCategoryExpense(categoryTableBody, transfer, transferAmount);
+
+            const newRow = tableBody.insertRow();
+            const cell1 = newRow.insertCell();
+            const cell2 = newRow.insertCell();
+            const cell3 = newRow.insertCell();
+           /* const cell4 = newRow.insertCell();*/
+
+            cell1.innerHTML = tableBody.rows.length;
+            cell2.innerHTML = "All Categories";
+            cell3.innerHTML = "All Categories";
+           /* cell4.innerHTML = amount.toFixed(2);*/
+
+            totalExpense += amount;
+            balance = budget-totalExpense
+
+
+            document.getElementById("totalExpense").textContent = totalExpense.toFixed(2);
+
+            document.getElementById("credit").value = "";
+            document.getElementById("creditAmount").value = "";
+            document.getElementById("fundsAmount").value = "";
+            document.getElementById("depositAmount").value = "";
+            document.getElementById("insuranceAmount").value = "";
+            document.getElementById("goalsAmount").value = "";
+            document.getElementById("emergencyAmount").value = "";
+            document.getElementById("needsAmount").value = "";
+            document.getElementById("transferAmount").value = "";
+            document.getElementById("budgetRemaining").value = "";
+
+            /*totalDisplay.textContent = "Total:" + totalExpenses;*/
+            document.getElementById("totalExpense").innerText = "Total Expense: " + totalExpense.toFixed(2);
+            document.getElementById("budgetRemaining").innerText = "Balance : " + balance.toFixed(2);
+
+        }
+
+        function updateCategoryExpense(tableBody, category, amount) {
+            const existingRow = findRowByCategory(tableBody, category);
+            if (existingRow) {
+                existingRow.cells[1].textContent = parseFloat(existingRow.cells[1].textContent) + parseFloat(amount);
+            } else {
+                const newRow = tableBody.insertRow();
+                const cell1 = newRow.insertCell();
+                const cell2 = newRow.insertCell();
+
+                cell1.textContent = category;
+                cell2.textContent = amount;
+            }
+        }
+
+        function findRowByCategory(tableBody, category) {
+            for (let i = 0; i < tableBody.rows.length; i++) {
+                if (tableBody.rows[i].cells[0].textContent === category) {
+                    return tableBody.rows[i];
+                }
+            }
+            return null;
+        }
+    </script>
+</body>
+
+</html>
